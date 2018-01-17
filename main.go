@@ -11,22 +11,35 @@ import (
 	"github.com/illotum/roll/table"
 )
 
+var version = "nightly"
+
 type config struct {
 	Text string              `toml:"text"`
 	Data map[string][]string `toml:"data"`
 }
 
 func main() {
+	var v bool
+	var seed int64
+	flag.BoolVar(&v, "v", false, "print version and exit")
+	flag.Int64Var(&seed, "seed", 0, "seed PRNG with a given number")
 	flag.Parse()
-	rand.Seed(time.Now().Unix())
+	log.SetFlags(0)
+
+	if v {
+		log.Printf("roll %s\n", version)
+		os.Exit(0)
+	}
+	if seed == 0 {
+		seed = time.Now().Unix()
+	}
+	rand.Seed(seed)
 
 	if len(os.Args) < 2 {
 		log.Fatal("Nothing to roll")
 	}
-
-	fname := os.Args[1]
 	var c config
-	md, err := toml.DecodeFile(fname, &c)
+	md, err := toml.DecodeFile(os.Args[1], &c)
 	if err != nil {
 		log.Fatal(err)
 	}
