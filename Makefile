@@ -14,15 +14,32 @@ install:
 clean:
 	@rm -rf out
 
-release: out/${BINARY}.gz
+release: out/${BINARY}.linux.gz out/${BINARY}.darwin.gz out/${BINARY}.exe.gz
 
-out/${BINARY}.gz: out/${BINARY}
-	@gzip -k out/${BINARY}
+out/${BINARY}.linux.gz: out/${BINARY}.linux
+	@gzip -k out/${BINARY}.linux
 
-out/${BINARY}:
+out/${BINARY}.darwin.gz: out/${BINARY}.darwin
+	@gzip -k out/${BINARY}.darwin
+
+out/${BINARY}.exe.gz: out/${BINARY}.exe 
+	@gzip -k out/${BINARY}.exe
+
+out/${BINARY}.linux:
 	@mkdir -p ./out
 	@go generate ./...
-	@GOOS=linux GOARCH=amd64 go build ${LDFLAGS} ./cmd/roll -o out/${BINARY}
+	@GOOS=linux GOARCH=amd64 go build ${LDFLAGS} -o out/${BINARY}.linux ./cmd/roll 
+
+out/${BINARY}.darwin:
+	@mkdir -p ./out
+	@go generate ./...
+	@GOOS=darwin GOARCH=amd64 go build ${LDFLAGS} -o out/${BINARY}.darwin ./cmd/roll 
+
+out/${BINARY}.exe:
+	@mkdir -p ./out
+	@go generate ./...
+	@GOOS=windows GOARCH=amd64 go build ${LDFLAGS} -o out/${BINARY}.exe ./cmd/roll 
+
 
 version:
 	@echo "${VERSION}" > version
