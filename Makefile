@@ -8,6 +8,7 @@ EXEC := docker run --rm -v "$(shell pwd)":/go/src/${PROJECT} -w /go/src/${PROJEC
 .PHONY: clean install version test bench run
 
 install:
+	@go generate ./...
 	@go install ${LDFLAGS}
 
 clean:
@@ -20,6 +21,7 @@ out/${BINARY}.gz: out/${BINARY}
 
 out/${BINARY}:
 	@mkdir -p ./out
+	@go generate ./...
 	@GOOS=linux GOARCH=amd64 go build ${LDFLAGS} -o out/${BINARY}
 
 version:

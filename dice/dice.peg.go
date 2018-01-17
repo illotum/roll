@@ -4,7 +4,7 @@
 //
 // Adapted from https://github.com/mna/pigeon/blob/master/examples/calculator/calculator.peg
 
-//go:generate pigeon -optimize-basic-latin -optimize-grammar -optimize-parser -no-recover -o dice.peg.go dice.pigeon
+//go:generate pigeon -optimize-basic-latin -optimize-grammar -optimize-parser -o dice.peg.go dice.pigeon
 package dice
 
 import (
@@ -68,25 +68,25 @@ var g = &grammar{
 	rules: []*rule{
 		{
 			name: "Input",
-			pos:  position{line: 53, col: 1, offset: 1194},
+			pos:  position{line: 53, col: 1, offset: 1182},
 			expr: &actionExpr{
-				pos: position{line: 53, col: 10, offset: 1203},
+				pos: position{line: 53, col: 10, offset: 1191},
 				run: (*parser).callonInput1,
 				expr: &seqExpr{
-					pos: position{line: 53, col: 10, offset: 1203},
+					pos: position{line: 53, col: 10, offset: 1191},
 					exprs: []interface{}{
 						&labeledExpr{
-							pos:   position{line: 53, col: 10, offset: 1203},
+							pos:   position{line: 53, col: 10, offset: 1191},
 							label: "expr",
 							expr: &ruleRefExpr{
-								pos:  position{line: 53, col: 15, offset: 1208},
+								pos:  position{line: 53, col: 15, offset: 1196},
 								name: "Expr",
 							},
 						},
 						&notExpr{
-							pos: position{line: 85, col: 8, offset: 1747},
+							pos: position{line: 85, col: 8, offset: 1735},
 							expr: &anyMatcher{
-								line: 85, col: 9, offset: 1748,
+								line: 85, col: 9, offset: 1736,
 							},
 						},
 					},
@@ -95,17 +95,17 @@ var g = &grammar{
 		},
 		{
 			name: "Expr",
-			pos:  position{line: 57, col: 1, offset: 1243},
+			pos:  position{line: 57, col: 1, offset: 1231},
 			expr: &actionExpr{
-				pos: position{line: 57, col: 9, offset: 1251},
+				pos: position{line: 57, col: 9, offset: 1239},
 				run: (*parser).callonExpr1,
 				expr: &seqExpr{
-					pos: position{line: 57, col: 9, offset: 1251},
+					pos: position{line: 57, col: 9, offset: 1239},
 					exprs: []interface{}{
 						&zeroOrMoreExpr{
-							pos: position{line: 83, col: 19, offset: 1728},
+							pos: position{line: 83, col: 19, offset: 1716},
 							expr: &charClassMatcher{
-								pos:             position{line: 83, col: 19, offset: 1728},
+								pos:             position{line: 83, col: 19, offset: 1716},
 								val:             "[ \\n\\t\\r]",
 								chars:           []rune{' ', '\n', '\t', '\r'},
 								basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -114,25 +114,25 @@ var g = &grammar{
 							},
 						},
 						&labeledExpr{
-							pos:   position{line: 57, col: 11, offset: 1253},
+							pos:   position{line: 57, col: 11, offset: 1241},
 							label: "first",
 							expr: &ruleRefExpr{
-								pos:  position{line: 57, col: 17, offset: 1259},
+								pos:  position{line: 57, col: 17, offset: 1247},
 								name: "Term",
 							},
 						},
 						&labeledExpr{
-							pos:   position{line: 57, col: 22, offset: 1264},
+							pos:   position{line: 57, col: 22, offset: 1252},
 							label: "rest",
 							expr: &zeroOrMoreExpr{
-								pos: position{line: 57, col: 27, offset: 1269},
+								pos: position{line: 57, col: 27, offset: 1257},
 								expr: &seqExpr{
-									pos: position{line: 57, col: 29, offset: 1271},
+									pos: position{line: 57, col: 29, offset: 1259},
 									exprs: []interface{}{
 										&zeroOrMoreExpr{
-											pos: position{line: 83, col: 19, offset: 1728},
+											pos: position{line: 83, col: 19, offset: 1716},
 											expr: &charClassMatcher{
-												pos:             position{line: 83, col: 19, offset: 1728},
+												pos:             position{line: 83, col: 19, offset: 1716},
 												val:             "[ \\n\\t\\r]",
 												chars:           []rune{' ', '\n', '\t', '\r'},
 												basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -141,10 +141,10 @@ var g = &grammar{
 											},
 										},
 										&actionExpr{
-											pos: position{line: 71, col: 10, offset: 1526},
+											pos: position{line: 71, col: 10, offset: 1514},
 											run: (*parser).callonExpr12,
 											expr: &charClassMatcher{
-												pos:             position{line: 71, col: 12, offset: 1528},
+												pos:             position{line: 71, col: 12, offset: 1516},
 												val:             "[+-]",
 												chars:           []rune{'+', '-'},
 												basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -153,9 +153,9 @@ var g = &grammar{
 											},
 										},
 										&zeroOrMoreExpr{
-											pos: position{line: 83, col: 19, offset: 1728},
+											pos: position{line: 83, col: 19, offset: 1716},
 											expr: &charClassMatcher{
-												pos:             position{line: 83, col: 19, offset: 1728},
+												pos:             position{line: 83, col: 19, offset: 1716},
 												val:             "[ \\n\\t\\r]",
 												chars:           []rune{' ', '\n', '\t', '\r'},
 												basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -164,7 +164,7 @@ var g = &grammar{
 											},
 										},
 										&ruleRefExpr{
-											pos:  position{line: 57, col: 39, offset: 1281},
+											pos:  position{line: 57, col: 39, offset: 1269},
 											name: "Term",
 										},
 									},
@@ -172,9 +172,9 @@ var g = &grammar{
 							},
 						},
 						&zeroOrMoreExpr{
-							pos: position{line: 83, col: 19, offset: 1728},
+							pos: position{line: 83, col: 19, offset: 1716},
 							expr: &charClassMatcher{
-								pos:             position{line: 83, col: 19, offset: 1728},
+								pos:             position{line: 83, col: 19, offset: 1716},
 								val:             "[ \\n\\t\\r]",
 								chars:           []rune{' ', '\n', '\t', '\r'},
 								basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -188,33 +188,33 @@ var g = &grammar{
 		},
 		{
 			name: "Term",
-			pos:  position{line: 61, col: 1, offset: 1330},
+			pos:  position{line: 61, col: 1, offset: 1318},
 			expr: &actionExpr{
-				pos: position{line: 61, col: 9, offset: 1338},
+				pos: position{line: 61, col: 9, offset: 1326},
 				run: (*parser).callonTerm1,
 				expr: &seqExpr{
-					pos: position{line: 61, col: 9, offset: 1338},
+					pos: position{line: 61, col: 9, offset: 1326},
 					exprs: []interface{}{
 						&labeledExpr{
-							pos:   position{line: 61, col: 9, offset: 1338},
+							pos:   position{line: 61, col: 9, offset: 1326},
 							label: "first",
 							expr: &ruleRefExpr{
-								pos:  position{line: 61, col: 15, offset: 1344},
+								pos:  position{line: 61, col: 15, offset: 1332},
 								name: "Factor",
 							},
 						},
 						&labeledExpr{
-							pos:   position{line: 61, col: 22, offset: 1351},
+							pos:   position{line: 61, col: 22, offset: 1339},
 							label: "rest",
 							expr: &zeroOrMoreExpr{
-								pos: position{line: 61, col: 27, offset: 1356},
+								pos: position{line: 61, col: 27, offset: 1344},
 								expr: &seqExpr{
-									pos: position{line: 61, col: 29, offset: 1358},
+									pos: position{line: 61, col: 29, offset: 1346},
 									exprs: []interface{}{
 										&zeroOrMoreExpr{
-											pos: position{line: 83, col: 19, offset: 1728},
+											pos: position{line: 83, col: 19, offset: 1716},
 											expr: &charClassMatcher{
-												pos:             position{line: 83, col: 19, offset: 1728},
+												pos:             position{line: 83, col: 19, offset: 1716},
 												val:             "[ \\n\\t\\r]",
 												chars:           []rune{' ', '\n', '\t', '\r'},
 												basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -223,13 +223,13 @@ var g = &grammar{
 											},
 										},
 										&actionExpr{
-											pos: position{line: 75, col: 10, offset: 1585},
+											pos: position{line: 75, col: 10, offset: 1573},
 											run: (*parser).callonTerm10,
 											expr: &choiceExpr{
-												pos: position{line: 75, col: 12, offset: 1587},
+												pos: position{line: 75, col: 12, offset: 1575},
 												alternatives: []interface{}{
 													&charClassMatcher{
-														pos:             position{line: 75, col: 12, offset: 1587},
+														pos:             position{line: 75, col: 12, offset: 1575},
 														val:             "[*/]",
 														chars:           []rune{'*', '/'},
 														basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -237,7 +237,7 @@ var g = &grammar{
 														inverted:        false,
 													},
 													&litMatcher{
-														pos:        position{line: 75, col: 24, offset: 1599},
+														pos:        position{line: 75, col: 24, offset: 1587},
 														val:        "d",
 														ignoreCase: true,
 													},
@@ -245,9 +245,9 @@ var g = &grammar{
 											},
 										},
 										&zeroOrMoreExpr{
-											pos: position{line: 83, col: 19, offset: 1728},
+											pos: position{line: 83, col: 19, offset: 1716},
 											expr: &charClassMatcher{
-												pos:             position{line: 83, col: 19, offset: 1728},
+												pos:             position{line: 83, col: 19, offset: 1716},
 												val:             "[ \\n\\t\\r]",
 												chars:           []rune{' ', '\n', '\t', '\r'},
 												basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -256,7 +256,7 @@ var g = &grammar{
 											},
 										},
 										&ruleRefExpr{
-											pos:  position{line: 61, col: 39, offset: 1368},
+											pos:  position{line: 61, col: 39, offset: 1356},
 											name: "Factor",
 										},
 									},
@@ -269,31 +269,31 @@ var g = &grammar{
 		},
 		{
 			name: "Factor",
-			pos:  position{line: 65, col: 1, offset: 1417},
+			pos:  position{line: 65, col: 1, offset: 1405},
 			expr: &choiceExpr{
-				pos: position{line: 65, col: 11, offset: 1427},
+				pos: position{line: 65, col: 11, offset: 1415},
 				alternatives: []interface{}{
 					&actionExpr{
-						pos: position{line: 65, col: 11, offset: 1427},
+						pos: position{line: 65, col: 11, offset: 1415},
 						run: (*parser).callonFactor2,
 						expr: &seqExpr{
-							pos: position{line: 65, col: 11, offset: 1427},
+							pos: position{line: 65, col: 11, offset: 1415},
 							exprs: []interface{}{
 								&litMatcher{
-									pos:        position{line: 65, col: 11, offset: 1427},
+									pos:        position{line: 65, col: 11, offset: 1415},
 									val:        "(",
 									ignoreCase: false,
 								},
 								&labeledExpr{
-									pos:   position{line: 65, col: 15, offset: 1431},
+									pos:   position{line: 65, col: 15, offset: 1419},
 									label: "expr",
 									expr: &ruleRefExpr{
-										pos:  position{line: 65, col: 20, offset: 1436},
+										pos:  position{line: 65, col: 20, offset: 1424},
 										name: "Expr",
 									},
 								},
 								&litMatcher{
-									pos:        position{line: 65, col: 25, offset: 1441},
+									pos:        position{line: 65, col: 25, offset: 1429},
 									val:        ")",
 									ignoreCase: false,
 								},
@@ -301,29 +301,29 @@ var g = &grammar{
 						},
 					},
 					&actionExpr{
-						pos: position{line: 67, col: 5, offset: 1472},
+						pos: position{line: 67, col: 5, offset: 1460},
 						run: (*parser).callonFactor8,
 						expr: &labeledExpr{
-							pos:   position{line: 67, col: 5, offset: 1472},
+							pos:   position{line: 67, col: 5, offset: 1460},
 							label: "integer",
 							expr: &actionExpr{
-								pos: position{line: 79, col: 12, offset: 1653},
+								pos: position{line: 79, col: 12, offset: 1641},
 								run: (*parser).callonFactor10,
 								expr: &seqExpr{
-									pos: position{line: 79, col: 12, offset: 1653},
+									pos: position{line: 79, col: 12, offset: 1641},
 									exprs: []interface{}{
 										&zeroOrOneExpr{
-											pos: position{line: 79, col: 12, offset: 1653},
+											pos: position{line: 79, col: 12, offset: 1641},
 											expr: &litMatcher{
-												pos:        position{line: 79, col: 12, offset: 1653},
+												pos:        position{line: 79, col: 12, offset: 1641},
 												val:        "-",
 												ignoreCase: false,
 											},
 										},
 										&oneOrMoreExpr{
-											pos: position{line: 79, col: 17, offset: 1658},
+											pos: position{line: 79, col: 17, offset: 1646},
 											expr: &charClassMatcher{
-												pos:             position{line: 79, col: 17, offset: 1658},
+												pos:             position{line: 79, col: 17, offset: 1646},
 												val:             "[0-9]",
 												ranges:          []rune{'0', '9'},
 												basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
