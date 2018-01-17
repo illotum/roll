@@ -1,0 +1,85 @@
+{
+// Small PEG-generated parser that computes simple dice rolls and integer math.
+//
+// Example usage: $ calculator "3 + (2 - 5 * 12) - 3d12"
+//
+// Adapted from https://github.com/mna/pigeon/blob/master/examples/calculator/calculator.peg
+
+//go:generate pigeon -optimize-basic-latin -optimize-grammar -optimize-parser -o dice.peg.go dice.pigeon
+package dice
+
+var ops = map[string]func(int, int) int {
+    "+": func(l, r int) int {
+        return l + r
+    },
+    "-": func(l, r int) int {
+        return l - r
+    },
+    "*": func(l, r int) int {
+        return l * r
+    },
+    "/": func(l, r int) int {
+        return l / r
+    },
+    "d": func(l, r int) int {
+        var o int
+        for i:=0; i<l; i++ {
+            o += rand.Intn(r) + 1
+        }
+        return o
+    },
+}
+
+func toIfaceSlice(v interface{}) []interface{} {
+    if v == nil {
+        return nil
+    }
+    return v.([]interface{})
+}
+
+func eval(first, rest interface{}) int {
+    l := first.(int)
+    restSl := toIfaceSlice(rest)
+    for _, v := range restSl {
+        restExpr := toIfaceSlice(v)
+        r := restExpr[3].(int)
+        op := restExpr[1].(string)
+        l = ops[op](l, r)
+    }
+    return l
+}
+}
+
+Input <- expr:Expr EOF {
+    return expr, nil
+}
+
+Expr <- _ first:Term rest:( _ AddOp _ Term )* _ {
+    return eval(first, rest), nil
+}
+
+Term <- first:Factor rest:( _ MulOp _ Factor )* {
+    return eval(first, rest), nil
+}
+
+Factor <- '(' expr:Expr ')' {
+    return expr, nil
+} / integer:Integer {
+    return integer, nil
+}
+
+AddOp <- ( '+' / '-' ) {
+    return string(c.text), nil
+}
+
+MulOp <- ( '*' / '/' / 'd'i ) {
+    return string(c.text), nil
+}
+
+Integer <- '-'? [0-9]+ {
+    return strconv.Atoi(string(c.text))
+}
+
+_ "whitespace" <- [ \n\t\r]*
+
+EOF <- !.

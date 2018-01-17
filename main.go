@@ -8,7 +8,13 @@ import (
 	"time"
 
 	"github.com/BurntSushi/toml"
+	"github.com/illotum/roll/table"
 )
+
+type config struct {
+	Text string              `toml:"text"`
+	Data map[string][]string `toml:"data"`
+}
 
 func main() {
 	flag.Parse()
@@ -38,5 +44,17 @@ func main() {
 		log.Fatal(err)
 	}
 
-	templ.Execute(os.Stdout, &data)
+	err = templ.Execute(os.Stdout, &data)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func parseTables(ms map[string][]string) (map[string]table.Table, error) {
+	ts := make(map[string]table.Table)
+	for k, ss := range ms {
+		t := table.New(ss)
+		ts[k] = t
+	}
+	return ts, nil
 }
