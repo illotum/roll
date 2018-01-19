@@ -31,7 +31,7 @@ func (t table) Total() int {
 // Pick returns string at the given weighted table pos.
 func (t table) Pick(w int) string {
 	if w > t.Total() {
-		w = t.Total()
+		w = t.Total() - 1
 	}
 	return t.ls[t.findIx(w)]
 }
