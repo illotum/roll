@@ -35,7 +35,7 @@ func main() {
 			rand.Seed(seed)
 		},
 	}
-	root.PersistentFlags().Int64VarP(&seed, "seed", "s", time.Now().Unix(), "random number generator `SEED` (default current timestamp)")
+	root.PersistentFlags().Int64VarP(&seed, "seed", "s", time.Now().Unix(), "random number generator `SEED`")
 
 	root.Execute()
 }

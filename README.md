@@ -18,7 +18,7 @@ Flags:
 ## Example Input
 
 ```toml
-text = """
+template = """
 1D100: {{roll "1d100"}}
 Coin: {{random .coin}}
 
@@ -27,7 +27,7 @@ AW move
   2d6: {{roll "2d6" | pick .aw}}
 """
 
-[data]
+[tables]
 coin = [
     "head",
     "tail",
