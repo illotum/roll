@@ -62,7 +62,11 @@ Term <- first:Factor rest:( _ MulOp _ Factor )* {
     return eval(first, rest), nil
 }
 
-Factor <- '(' expr:Expr ')' {
+Factor <- first:Roll rest:( _ RollOp _ Roll )* {
+    return eval(first, rest), nil
+}
+
+Roll <- '(' expr:Expr ')' {
     return expr, nil
 } / integer:Integer {
     return integer, nil
@@ -72,7 +76,11 @@ AddOp <- ( '+' / '-' ) {
     return string(c.text), nil
 }
 
-MulOp <- ( '*' / '/' / 'd'i ) {
+MulOp <- ( '*' / '/' ) {
+    return string(c.text), nil
+}
+
+RollOp <- 'd'i {
     return string(c.text), nil
 }
 
