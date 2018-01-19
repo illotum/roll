@@ -21,13 +21,14 @@ func main() {
 		Short: "Roll on a table",
 		Args:  cobra.MinimumNArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
-			r, err := roll.ReadFile(args[0])
+			fn := args[0]
+			r, err := roll.ReadFile(fn)
 			if err != nil {
-				log.Fatal(err)
+				log.Fatalf("Error encountered while parsing %q: %s", fn, err)
 			}
-			err = r.Text.ExecuteTemplate(os.Stdout, "", r.Data)
+			err = r.Template.ExecuteTemplate(os.Stdout, "", r.Tables)
 			if err != nil {
-				log.Fatal(err)
+				log.Fatalf("Error encountered while executing %q: %s", fn, err)
 			}
 		},
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {

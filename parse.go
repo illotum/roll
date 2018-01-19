@@ -8,8 +8,8 @@ import (
 
 // Record describes one template and corresponding weighted tables.
 type Record struct {
-	Text templ            `toml:"text"`
-	Data map[string]table `toml:"data"`
+	Template templ            `toml:"template"`
+	Tables   map[string]table `toml:"tables"`
 }
 
 // ReadFile parses template and tables out of a TOML file.
@@ -20,7 +20,7 @@ func ReadFile(name string) (Record, error) {
 		return f, err
 	}
 
-	if !md.IsDefined("text") {
+	if !md.IsDefined("tables") {
 		return f, errors.New("'text' string is required in a table")
 
 	}
